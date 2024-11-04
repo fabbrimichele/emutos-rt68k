@@ -4,3 +4,8 @@ Programs are compiled with [m68k-atari-mint](http://vincent.riviere.free.fr/soft
 uses MiNTLib producing really big executable, hello.tos is more than 130KB.
 
 TODO: find a way to use a more compact clib to produce smaller programs
+
+## Libraries
+* [GEMlib doc](http://arnaud.bercegeay.free.fr/gemlib/html/)
+* [GEMlib homepage](http://arnaud.bercegeay.free.fr/gemlib/)
+* [GEMlib src](https://github.com/freemint/gemlib)
