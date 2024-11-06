@@ -1,4 +1,6 @@
 NAME=g_hello
+TYPE=prg
+DEPLOY_PATH=/home/michele/hatari/Harddisk/APPS
 
 PREFIX=m68k-atari-mint
 
@@ -9,13 +11,13 @@ OBJDUMP=$(PREFIX)-objdump
 
 #  The -Wl,--traditional-format option above is only useful when you want to use a classic Atari debugger like MonST2
 #CFLAGS=-O2 -Wl,--traditional-format
-
-CFLAGS=-lgem
+#CFLAGS=-lgem
 
 build: $(NAME).c
-	$(CC) $(NAME).c -o $(NAME).prg $(CFLAGS) 
+	m68k-atari-mint-gcc -nostdlib $(LIBCMINI)/crt0.o $(NAME).c -o $(NAME).$(TYPE) -s -L/usr/libcmini/lib -lcmini -lgcc -lgem
 
 clean:
-	rm 	$(NAME).prg
+	rm -f $(NAME).prg
 
-#m68k-atari-mint-gcc hello.c -o hello.tos -O2 -Wl,--traditional-format
+deploy:
+	cp $(NAME).$(TYPE) $(DEPLOY_PATH)

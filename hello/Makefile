@@ -32,5 +32,5 @@ build: $(NAME).c
 clean:
 	rm -f $(NAME).tos
 
-deploy-hatari:
+deploy:
 	cp $(NAME).tos $(DEPLOY_PATH)
