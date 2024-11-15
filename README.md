@@ -12,7 +12,7 @@ For small footprint install [libcmini](https://github.com/freemint/libcmini):
   
 ## libraries location
 * /usr/m68k-atari-mint
-* 
+* /usr/libcmini
 
 ## Resources
 * [libcmini, a small-footprint C library](https://github.com/freemint/libcmini)
@@ -20,3 +20,6 @@ For small footprint install [libcmini](https://github.com/freemint/libcmini):
 * [GEMlib homepage](http://arnaud.bercegeay.free.fr/gemlib/)
 * [GEMlib src](https://github.com/freemint/gemlib)
 * [Code for using the Atari hardware using all possible systems functions](https://github.com/pmandin/cleancode)
+* https://github.com/ggnkua/Atari_ST_Sources
+* [Read Joystick, apparently you need your own subroutine](https://github.com/simonsunnyboy/stlibs4gcc/tree/master/ikbd)
+* [Reading joystick tutorial](https://www.atarimagazines.com/v5n1/joystickst.html)
