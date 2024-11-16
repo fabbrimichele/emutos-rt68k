@@ -19,9 +19,7 @@ void uninstall_joy_vector(void);
 void joy_vector(void* status);
 void print_joy_status(unsigned short status);
 
-_KBDVECS* kbd_vectors;
 void* old_joy_vector;
-
 unsigned short joy_status;
 
 int main() {
@@ -70,13 +68,11 @@ void print_joy_status(unsigned short status) {
 void install_joy_vector(void) {
     _KBDVECS* kbd_vectors = Kbdvbase();
     old_joy_vector = kbd_vectors->joyvec;
-    //old_kbd_vectors->joyvec = kbd_vectors->joyvec;
     kbd_vectors->joyvec = joy_vector;
 }
 
 void uninstall_joy_vector(void) {
-    //_KBDVECS* kbd_vectors = Kbdvbase();
-    //kbd_vectors->joyvec = old_kbd_vectors->joyvec;
+    _KBDVECS* kbd_vectors = Kbdvbase();
     kbd_vectors->joyvec = old_joy_vector;
 }
 
