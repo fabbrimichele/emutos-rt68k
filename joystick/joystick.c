@@ -22,16 +22,21 @@ unsigned short joy_status;
 
 int main() {
     unsigned short old_joy_status = 0;
+    unsigned short cur_joy_status = 0;
 
     Supexec(install_joy_vector);
     Bconout(DEV_IKBD, IKBD_JOY_EVENT_REPORTING);
 
-    printf("Move joystick...\n");
+    printf("Move joystick, press FIRE button to exit.\n");
 
-	while (true) {
-        if (joy_status != old_joy_status) {
-            print_joy_status(joy_status);
-            old_joy_status = joy_status;
+	while (!(cur_joy_status & IKBD_JOY_FIRE)) {
+        // Take a snapshot of the joystick status which 
+        // continues changing in the interrupt function
+        cur_joy_status = joy_status;
+        
+        if (cur_joy_status != old_joy_status) {
+            print_joy_status(cur_joy_status);
+            old_joy_status = cur_joy_status;
         }
 	}
 
@@ -39,8 +44,6 @@ int main() {
     return 0;
 }
 
-// Status needs to be passed to make a copy, otherwise
-// it could change during the execution of print_joy_status()
 void print_joy_status(unsigned short status) {
     printf("Status: %04x\n", status);
 
