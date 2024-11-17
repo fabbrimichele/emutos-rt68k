@@ -21,9 +21,6 @@ CFLAGS=-nostdlib /usr/libcmini/lib/crt0.o -s -L/usr/libcmini/lib -lcmini -lgcc
 # `-nostdlib /usr/libcmini/lib/crt0.o` must be at the beginning and 
 # `-s -L/usr/libcmini/lib -lcmini -lgcc` at the end
 
-# TODO:
-# Use LIBCMINI
-
 build: $(NAME).c
 	m68k-atari-mint-gcc -nostdlib $(LIBCMINI)/crt0.o $(NAME).c -o $(NAME).tos -s -L/usr/libcmini/lib -lcmini -lgcc
 

@@ -29,7 +29,7 @@ int main() {
     Supexec(install_joy_vector);
     Bconout(DEV_IKBD, IKBD_JOY_EVENT_REPORTING);
 
-    printf("Move joystick, press FIRE button to exit.\n");
+    printf("Move joystick, press FIRE button to exit.\r\n");
 
 	while (!(cur_joy_status & IKBD_JOY_FIRE)) {
         // Take a snapshot of the joystick status which 
@@ -48,20 +48,20 @@ int main() {
 }
 
 void print_joy_status(unsigned short status) {
-    printf("Status: %04x\n", status);
+    printf("Status: %04x\r\n", status);
 
     if (status & IKBD_JOY_UP) {
-        printf("UP\n");
+        printf("UP\r\n");
     } else if (status & IKBD_JOY_DOWN) {
-        printf("DOWN\n");
+        printf("DOWN\r\n");
     } else if (status & IKBD_JOY_LEFT) {
-        printf("LEFT\n");
+        printf("LEFT\r\n");
     } else if (status & IKBD_JOY_RIGHT) {
-        printf("RIGHT\n");
+        printf("RIGHT\r\n");
     }
 
     if (status & IKBD_JOY_FIRE) {
-        printf("FIRE\n");
+        printf("FIRE\r\n");
     }
 }
 

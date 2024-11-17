@@ -13,7 +13,7 @@ LD=$(PREFIX)-ld
 CFLAGS=-lgem
 
 build: $(NAME).c
-	$(CC) $(NAME).c -o $(NAME).tos -Wa,-S $(CFLAGS) 
+	$(CC) -nostdlib $(LIBCMINI)/crt0.o $(NAME).c -o $(NAME).tos -s -L/usr/libcmini/lib -lcmini -lgcc -lgem
 
 clean:
 	rm -f $(NAME).tos
