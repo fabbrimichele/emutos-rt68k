@@ -4,7 +4,7 @@
 void help();
 void read();
 void write();
-void set_curr_addr();
+void set_default_addr();
 
 // Utils 
 int read_addr();
@@ -23,7 +23,7 @@ int main() {
 
     switch (toupper(c)) {
         case 'S':
-            set_curr_addr();
+            set_default_addr();
             break;
 
         case 'R':
@@ -48,14 +48,14 @@ int main() {
 }
 
 void help() {
-    printf("[s]et  : set current address\r\n");
+    printf("[s]et  : set default address\r\n");
     printf("[r]ead : read memory\r\n");
     printf("[w]rite: write memory\r\n");
     printf("[h]elp : this help\r\n");
     printf("[q]uit : exit program\r\n");
 }
 
-void set_curr_addr() {
+void set_default_addr() {
     unsigned int input_addr;
     
     printf("set addr (hex): ");
