@@ -53,6 +53,7 @@ void help() {
     printf("[w]rite: write memory\r\n");
     printf("[h]elp : this help\r\n");
     printf("[q]uit : exit program\r\n");
+    printf("\r\n");
 }
 
 void set_default_addr() {
