@@ -22,7 +22,7 @@ int main() {
     printf("%c\r\n", c);
 
     switch (toupper(c)) {
-        case 'S':
+        case 'D':
             set_default_addr();
             break;
 
@@ -48,18 +48,18 @@ int main() {
 }
 
 void help() {
-    printf("[s]et  : set default address\r\n");
-    printf("[r]ead : read memory\r\n");
-    printf("[w]rite: write memory\r\n");
-    printf("[h]elp : this help\r\n");
-    printf("[q]uit : exit program\r\n");
+    printf("[d]efault : set default address\r\n");
+    printf("[r]ead    : read memory\r\n");
+    printf("[w]rite   : write memory\r\n");
+    printf("[h]elp    : this help\r\n");
+    printf("[q]uit    : exit program\r\n");
     printf("\r\n");
 }
 
 void set_default_addr() {
     unsigned int input_addr;
     
-    printf("set addr (hex): ");
+    printf("default addr (hex): ");
     scanf("%x", &input_addr);
     printf("\r\n\r\n");
 
@@ -93,6 +93,7 @@ int read_addr_with_default() {
     char input_addr_str[20];
     unsigned int input_addr;
 
+    fflush(stdin); // Required to avoid skipping fgets due to previuous scanf
     fgets(input_addr_str, sizeof(input_addr_str), stdin);
     printf("\r\n");
 
