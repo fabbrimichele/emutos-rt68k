@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <osbind.h>
+
 
 // Commands
 void help();
@@ -12,39 +14,43 @@ int read_addr();
 unsigned int curr_addr = 0;
 
 int main() {
-   printf("\r\nMonitor v0.1\r\n");
-   printf("Press 'h' for help.\r\n\r\n");
+    Super(0);  // Switch to supervisor mode
 
-   int c = 0;
-   while(c != 'q' && c != 'Q') {
-    printf("0x%06x> ", curr_addr);
-    c = getch();
-    printf("%c\r\n", c);
+    printf("\r\nMonitor v0.1\r\n");
+    printf("Press 'h' for help.\r\n\r\n");
 
-    switch (toupper(c)) {
-        case 'D':
-            set_default_addr();
-            break;
+    int c = 0;
+    while(c != 'q' && c != 'Q') {
+        printf("0x%06x> ", curr_addr);
+        c = getch();
+        printf("%c\r\n", c);
 
-        case 'R':
-            read();
-            break;
+        switch (toupper(c)) {
+            case 'D':
+                set_default_addr();
+                break;
 
-        case 'W':
-            write();
-            break;
+            case 'R':
+                read();
+                break;
+
+            case 'W':
+                write();
+                break;
+        
+            case 'H':
+                help();
+                break;
+
+            default:
+                break;
+        }    
+    }
+
+    printf("\r\n");
     
-        case 'H':
-            help();
-            break;
-
-        default:
-            break;
-    }    
-   }
-
-   printf("\r\n");
-   return 0;
+    Super(1);  // Restore user mode
+    return 0;
 }
 
 void help() {

@@ -27,5 +27,5 @@ build: $(NAME).c
 clean:
 	rm -f $(NAME).tos
 
-deploy:
+deploy: build
 	cp $(NAME).tos $(DEPLOY_PATH)
