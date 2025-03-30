@@ -100,6 +100,11 @@ void play_tone() {
 }
 
 void psg_write(unsigned char reg, unsigned char val) {
+    // TODO: this is not the proper way, there is a function
+    // provided by EmuTOS to read and write to the PSG.
+    // The following way should be fine (to be verified):
+    // - for low level access use: `giaccess`
+    // - to play a sound use `xbios(28, freq, duration, volume)`
     PSG->control = reg;
     PSG->data = val;
 }
