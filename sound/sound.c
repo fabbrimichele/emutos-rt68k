@@ -8,7 +8,25 @@ void pause(long);
 void play_pitch(UWORD);
 void play_sound(UWORD, UWORD);
 
-static UBYTE snddat[16];        /* read later by interrupt handler */
+/* 
+For details about the Dosound format 
+see Atari ST Internals page 196
+*/
+static UBYTE snddat[64] = {
+    0x00, 0x1F, // channel A pitch lo
+    0x01, 0x01, // channel A pitch hi
+    0x07, 0xFE, // enable channel A
+    0x08, 0x10, // amplitude: envelope
+    0x0B, 0x00, // envelope lo
+    0x0C, 0x20, // envelope hi
+    0x0D, 0x09, // envelope type
+    0xFF, 0x0F, // length (0xFF, value * 20ms)
+    // Another note                
+    0x00, 0x1F, // channel A pitch lo
+    0x01, 0x02, // channel A pitch hi
+    0xFF, 0x32, // length (0xFF, value * 20ms)
+    0xFF, 0x00  // end script
+};
 
 int main() {
     printf("\r\n");   
@@ -17,8 +35,7 @@ int main() {
     pause(100000);
 
     printf("Playing 440Hz with Dosound\r\n");   
-    play_sound(440, 4);
-    pause(100000);
+    Dosound((LONG)snddat);
 
     printf("\r\n");   
     return 0;
@@ -34,30 +51,6 @@ void play_pitch(UWORD pitch) {
 
     Giaccess(PSG_ALL_DISABLED, PSG_MODE | GIACCESS_WRITE);    // Disable all channels
 }
-
-/*
- *  play_sound()
- *
- *  This routine plays a sound:
- *      'frequency' is the frequency in Hz; must be > 0
- *      'duration' is the duration in ~250msec units: must be > 0 & < 32
- */
-void play_sound(UWORD frequency, UWORD duration) {
-    UWORD tp; /* 12 bit oscillation frequency setting value */
-
-    tp = 125000L / frequency;
-    snddat[0] = 0;      snddat[1] = LOBYTE(tp);     /* channel A pitch lo */
-    snddat[2] = 1;      snddat[3] = HIBYTE(tp);     /* channel A pitch hi */
-    snddat[4] = 7;      snddat[5] = 0xFE;
-    snddat[6] = 8;      snddat[7] = 0x10;           /* amplitude: envelope */
-    snddat[8] = 11;     snddat[9] = 0;              /* envelope lo */
-    snddat[10] = 12;    snddat[11] = duration * 8;  /* envelope hi */
-    snddat[12] = 13;    snddat[13] = 9;             /* envelope type */
-    snddat[14] = 0xFF;  snddat[15] = 0;
-
-    Dosound((LONG)snddat);
-}
-
 
 void pause(long length) {
     volatile long i;
