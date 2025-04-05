@@ -1,0 +1,1 @@
+Access directly the YM2149, memory address is HW specific

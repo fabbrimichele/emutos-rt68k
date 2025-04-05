@@ -1,0 +1,1 @@
+Access the YM2149 via EmuTOS functions.
