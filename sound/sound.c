@@ -20,11 +20,15 @@ static UBYTE snddat[64] = {
     0x0B, 0x00, // envelope lo
     0x0C, 0x20, // envelope hi
     0x0D, 0x09, // envelope type
-    0xFF, 0x0F, // length (0xFF, value * 20ms)
-    // Another note                
+    0xFF, 0x1E, // length (0xFF, value * 20ms)
+    // Another note            
+    // envelop must be set again, otherwise it continues the previous sound
     0x00, 0x1F, // channel A pitch lo
     0x01, 0x02, // channel A pitch hi
-    0xFF, 0x32, // length (0xFF, value * 20ms)
+    0x0B, 0x00, // envelope lo 
+    0x0C, 0x20, // envelope hi
+    0x0D, 0x09, // envelope type
+    0xFF, 0x1E, // length (0xFF, value * 20ms)
     0xFF, 0x00  // end script
 };
 
