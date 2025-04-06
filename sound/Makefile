@@ -1,6 +1,9 @@
 NAME=sound
 DEPLOY_PATH=/home/michele/hatari/Harddisk/APPS
 
+SERIAL_PORT=/dev/ttyUSB0
+BAUD_RATE=38400
+
 PREFIX=m68k-atari-mint
 
 CC=$(PREFIX)-gcc
@@ -29,3 +32,11 @@ clean:
 
 deploy: build
 	cp $(NAME).tos $(DEPLOY_PATH)
+
+# cs8 		: 8 data bits
+# -parenb 	: disable parity
+# cstopb	: 1 stop bit
+send: build
+	@echo "\033[0;31mStart a zmodem client on the RT68, e.g.: XYZ.TTP\033[0m"
+	stty -F $(SERIAL_PORT) $(BAUD_RATE) cs8 -parenb cstopb
+	sz $(NAME).tos > $(SERIAL_PORT) < $(SERIAL_PORT)
